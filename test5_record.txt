@@ -1,0 +1,89 @@
+
+一、	实验目的和要求
+在面向对象程序设计过程中,为了保证数据安全，通常不允许从外面直接访问类的成员变量，系统通过类中设计的特定的方法处理与类相关的数据。因此在设计中对于全体成员变量或需要保护的成员变量通过 private修饰。需要设计一组get/set方法来处理相关业务逻辑。此方式使用 Eclipse中的生成方式可以快速解决
+二、实验内容和原理
+参考演示代码，创建银行账号 Account 类，成员变量为 ID （帐号）number(金额)，实现存款类(balance)的不同业务：存(deposit)、 取(withdraw)和查询(getbalance)等功能。要求对成员变量进行封装处 理。考虑如何设计菜单选项。 
+提示：在 Eclipse 中，在代码区按 Alt_Shift_S 快捷键，可以直接使 用生成工具完成，也可以在代码点击鼠标右键，选择 Source，然后 在级联菜单中选择 Generate Getters/Setters…功能
+三、程序代码（要求有注释说明）
+
+import java.util.Scanner;//导入包
+class Balance extends Account {//Balance类
+    static private int ID;//成员变量为ID（帐号）进行封装处理
+    static private float Number = 0.0f;//）成员变量Number(金额),进行封装处理
+    public static int getID() {//get与set
+        return ID;
+    }
+
+    public void setID(int iD) {
+        ID = iD;
+    }
+
+    public static float getNumber() {
+        return Number;
+    }
+
+    public void setNumber(Float number) {
+        Number = number;
+    }
+
+    static float deposit() {//存款
+        System.out.print("\t\t请输入存款金额:");
+        Number = Number + sc.nextFloat();
+        return Number;
+    }
+
+static float withdraw() {//取款
+        float temp;//取款时的临时数，避免取款金额大与余额
+        System.out.println("\t\t您当前余额为"+ getNumber());
+        System.out.print("\t\t请输入取款金额:");
+        temp = sc.nextFloat();
+        while (temp > Number) {
+            System.out.print("\t\t卡内余额不足，请重新输入:");
+            temp = sc.nextFloat();
+        }
+        Number = Number-temp;
+        return Number;
+    }
+
+    static float getbalance() {//查询
+        return Number;
+    }
+}
+
+public class Account {//Account类
+    static Scanner sc = new Scanner(System.in);
+    static Balance cus = new Balance();
+    static int k;
+
+    public static void main(String[] args) {//main()方法
+        System.out.println("\t\t\t\t欢迎来到小宇银行,现支持如下业务:");
+        System.out.println("\t\t\t1:存款 2:取款   3:查询余额   4:退出本次服务");
+        System.out.print("\t\t请输入账户ID:");
+        cus.setID(sc.nextInt());//获取输入的账户ID
+        while (k != 4) {//进入业务循环
+            System.out.print("\t\t\t\t请做出你的选择:\n\t\t\t1:存款	2:取款	3:查询余额	4:退出本次服务\n\t\t\t");
+            k = sc.nextInt();
+            switch (k) {
+                case 1://存款
+                    System.out.println("\t\t存款成功,当前余额:"+Balance.deposit());
+                    break;
+                case 2://取款
+                    System.out.println("\t\t取款成功,当前余额:"+Balance.withdraw());
+                    break;
+                case 3://查询
+                    System.out.println("\t\t当前账户余额为:"+Balance.getbalance());
+                    break;
+            }
+            if (k != 4)
+                System.out.println("\t 欢迎下次使用");
+        }
+        System.out.println("\t\t欢迎下次光临,本银行给您最优质的服务");
+    }
+}
+
+四、实验结果截屏图
+略 
+五、实验结果与分析
+实现了创建银行账号 Account 类，成员变量为 ID （帐号）number(金额)，实现存款类(balance)的不同业务：存(deposit)、 取(withdraw)和查询(getbalance)等功能
+
+
