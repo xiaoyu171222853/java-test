@@ -1,0 +1,155 @@
+
+一、	实验目的和要求
+Java 语言的数组与传统的面向过程中定义的不同，它是引用数据类型。 基于类的定义模式。可以是不对称结构。数组定义方式为：int a[] = new int[3];表示 定义一组数组；int a[][] = new int[3][];表示定义二维数组，其中二维 的内容继续使用一维数组的定义方式；
+二、实验内容和原理
+（1）编程使用 Scanner 类实现下面数组数组定义与数据录入。
+'''
+ 请输入一维值:8
+56 78 35 96 65
+17 26 62
+47 69 30 54 42 70
+88 94
+30 28 69 79 31 37 23 73
+72 24 33 62 41 74 63 33 57
+47 54 45
+64 53 52 79 26
+'''
+其中一维是通过键盘输入数据确定，各个二维则由系统随机生成 10 以内的数控制数据的数量。要求生成数组数据为两位整数，生成数据 后能够按数组格式输出。 说明：上面的定义中只有一维是输入数据，其它数据由系统生成。
+（2）定义一个 Student 类（成员变量 name，sex，age，collage）。 生成 10 个同学的数组并能够录入数据并最终显示整体数据。如下方 式输入数据。
+'''
+ 请输入姓名:小宇
+请输入年龄:20
+请输入性别:1
+请输入单位:山西工学院
+请输入姓名:大宇
+请输入年龄:33
+请输入性别:0
+请输入单位:山西工学院
+个人信息:姓名是:小宇, 年龄是:20, 性别是:男, 工作单位是:山西工学院
+个人信息:姓名是:大宇, 年龄是:33, 性别是:女, 工作单位是:山西工学院
+'''
+程序需要修改 toString()方法
+三、程序代码（要求有注释说明）
+（1）、
+import java.util.*;
+public class test {
+    public static void main(String[] args) {
+    int value;//声明value,用来记录一维值
+        Scanner sc=new Scanner(System.in);
+        System.out.print("请输入一维值:");
+        while(true) {//输入不为整数时重新输入
+            try {
+                value = sc.nextInt();
+                break;
+            }catch(Exception e) {
+                System.out.print("您输入的不是整数，请重新输入一个整数:");
+                sc.next();
+                }
+            }
+        Random r=new Random();//随机数
+        int ar[][]=new int[value][];//声明数组
+        for(int i=0;i<value;i++)//读写循环
+        {   int er= r.nextInt(9)+1;//二维长度
+            ar=new int [value][er]; 
+            for(int j=0;j<er;j++){
+                int data=r.nextInt(90)+10;//数组数据生成
+                 ar[i][j]=data;//赋值
+                 System.out.print(ar[i][j]+" ");//输出
+                }
+                System.out.println("");
+        }
+        sc.close();//关闭流
+    }}
+
+（2）、
+import java.util.Scanner;//导入包 
+public class Student{//类
+private String name;//封装     
+private int age;     
+private char sex;    
+private String college;   
+public String getName() {//get/set       
+return name;     }   
+public void setName(String name) {       
+this.name = name;   
+}    
+public int getAge() { 
+return age;   
+}    
+public void setAge(int age) {  
+this.age = age;   
+}   
+public char getSex() {  
+return sex;   
+}    
+public void setSex(char sex) {  
+this.sex = sex;   
+}   
+public String getCollege() {   
+return college;  
+}    
+public void setCollege(String college) { 
+this.college = college;   
+} 
+public Student(String name,int age, char sex,String collage){  
+this.name=name;    
+this.age=age;   
+this.sex=sex;  
+this.college=collage; 
+}    
+public String toString() {//toString用于输出  
+return ("个人信息:姓名是:" +name + ", 年龄是:" + age + ", 性别是:" + sex + ", 工作单位是:" + college);   
+} 
+public static void main(String[] args) {     
+int ls;    
+String na[]=new String[10];//创建对应属性的数组,用来赋相应值    
+int ag[]=new int[10];  
+char se[]=new char[10]; 
+String co[]=new String[10]; 
+Scanner sc=new Scanner(System.in);  
+for(int i=0;i<10;i++){//输入,i小于多少就可输入多少   
+System.out.print("请输入姓名:");     
+na[i]=sc.next();           
+System.out.print("请输入年龄:");    
+ag[i]=sc.nextInt();        
+System.out.print("请输入性别:");    
+ls=sc.nextInt();//判断男女，1男0女    
+if(ls==1){           
+se[i]='男';      
+}            
+else if(ls==0){         
+se[i]='女';       
+}           
+System.out.print("请输入单位:");         
+co[i]=sc.next();       
+} sc.close();//关闭输入流
+for(int i=0;i<10;i++){//输出循环  
+Student stu =new Student(na[i], ag[i], se[i], co[i]);
+   System.out.println(stu.toString()); 
+   } } } 
+四、实验结果截屏图
+略
+五、实验结果与分析
+（1）、
+请输入一维值:8
+56 78 35 96 65
+17 26 62
+47 69 30 54 42 70
+88 94
+30 28 69 79 31 37 23 73
+72 24 33 62 41 74 63 33 57
+47 54 45
+64 53 52 79 26
+键盘输入获得一维长度，随机数生成作为二维长度，由于二维每个长度都不一样，所以需要做一维长度个个获取随机数并赋值，（即在一维循环里执行），数据也同理。
+（2）、象征性来两个
+请输入姓名:小宇
+请输入年龄:20
+请输入性别:1
+请输入单位:山西工学院
+请输入姓名:大宇
+请输入年龄:33
+请输入性别:0
+请输入单位:山西工学院
+个人信息:姓名是:小宇, 年龄是:20, 性别是:男, 工作单位是:山西工学院
+个人信息:姓名是:大宇, 年龄是:33, 性别是:女, 工作单位是:山西工学院
+数组直接作为参数带入，循环输出
