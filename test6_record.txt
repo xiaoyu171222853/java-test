@@ -1,0 +1,93 @@
+
+一、实验目的和要求
+参考课堂教学内容，设计一个能够体现继承概念的故事
+
+二、实验内容和原理
+设计一个动物（Animal 类）设计子类（Dog 与 Cat 实现继续 Animal
+模式）。编写一个测试类验证继承方式与结果，特别注意继承父类构
+造方法的方式，使用 Eclipse 编写此功能，注意代码中的区别是什么
+三、程序代码（要求有注释说明）
+public class test {
+    public static void main(String[] args) throws InterruptedException {// 用到了延迟
+        System.out.println("欢迎来到小宇的院子里，这里有一只3岁的小灰猫叫Tom，狗子4岁叫Spike");
+        Thread.sleep(1500);
+        System.out.println("\t\t看,Tom在这里趴着,嘴里还哼着小曲，过着悠闲快活的的生活");
+        Cat Tom = new Cat("Tom", 3, "gray");
+        Tom.singing();// Cat类
+        System.out.println("\t\t这时溜进来一只老鼠，让Tom看到了，并和旁边的Spike说");
+        Dog Spike = new Dog("Spike", 4, "brown");
+        Tom.see();// Cat类
+        System.out.println("\tSpike没吱声，但是刷的一下就跑出去了");
+        Spike.running();// Dog继承Animal的方法
+        System.out.println("\tTom愣了一下，也赶紧跑过去");
+        Tom.running();// Cat继承Animal的方法
+        Tom.thought();// Cat类
+        System.out.println("\t\t\t于是便展开了激烈的捉鼠大战");
+        Thread.sleep(1500);
+        System.out.println("本来是猫和鼠之间的战争，由于抢功劳，逐渐变成了猫和狗直间的斗争");
+        Thread.sleep(1000);
+        System.out.println("不仅没有抓到老鼠，还把家里搞的一团糟\n\t等待他们的只有主人的批评了了");
+    }
+}
+
+class Animal {
+    String name;
+    int age;
+    String color;
+
+    public Animal(String Name, int Age, String Color) {
+        name = Name;
+        age = Age;
+        color = Color;
+    }
+
+    void running() throws InterruptedException {
+        Thread.sleep(1500);
+        System.out.println("\t" + name + " 正在跑");
+        Thread.sleep(1500);
+    }
+
+    void delay() throws InterruptedException {
+        Thread.sleep(1500);
+    }
+
+}
+
+class Dog extends Animal {
+    Dog(String Name, int Age, String Color) {
+        super(Name, Age, Color);
+    }
+
+}
+
+class Cat extends Animal {
+    Cat(String Name, int Age, String Color) {
+        super(Name, Age, Color);
+
+    }
+
+    void singing() throws InterruptedException {
+        Thread.sleep(1500);
+        System.out.println("\t\t Tom:你爱我丫我爱你，蜜雪冰城甜蜜蜜~");
+        super.delay();
+    }
+
+    void see() throws InterruptedException {
+        Thread.sleep(1500);
+        System.out.println("\t\t 哦，Spike老哥，溜进来只老鼠，这回你别管，让我来。");
+        super.delay();
+    }
+
+    void thought() throws InterruptedException {
+        System.out.println("俗话说，狗拿耗子多管闲事，今天还真见到了，不行，这个功劳必须是我的");
+        super.delay();
+    }
+}
+四、实验结果截屏图
+ 略
+五、实验结果与分析
+主测试类方法的输出与调用其他类的方法的输出
+
+
+
+
