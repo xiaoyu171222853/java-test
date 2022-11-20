@@ -1,0 +1,56 @@
+实验 09 线程程序设计
+1.实验目的 
+(1) 现成的概念、线程的生命周期。
+(2) 多线程的编程：扩展 Thread 类与使用 Runnable 接口。
+(3) 使用多线程机制实现动画
+2.实验内容 
+(1) 运行下面的程序，理解用创建 Thread 子类的方法实现多线程。
+import java.util.*;
+class Test_Thread extends Thread {
+ int pauseTime;
+ String name;
+ public Test_Thread (int x,String n){
+ pauseTime=x;
+ name=n;
+}
+public void run(){
+ while(true){
+ try{
+ system.out.println(name+":"+new Date(System.currentTimeMillis()));
+ Tread.sleep(pauseTime);
+ }catch(Exception e){System.out.println(e);}
+}
+}
+static public void main(String srgs[]){
+ Test_Thread tp1=new Test_Thread (1000,"Fast");
+ tp1.start();
+ Test_Thread tp2=new Test_Thread (3000,"Slow");
+ tp2.start();
+}
+}
+(2) 运行下面的程序，理解用实现 Runnable 接口的方法实现多线程。
+Import java.util.*;
+class Test_Thread implements Runnable {
+ int pauseTime;
+ String name;
+ public Test_Thread (int x,String n){
+ pauseTime=x;
+ name=n;
+}
+public void run(){
+ while(true){
+ try{
+ system.out.println(name+":"+new Date(System.currentTimeMillis()));
+ Tread.sleep(pauseTime);
+ }catch(Exception e){System.out.println(e);}
+}
+}
+static public void main(String srgs[]){
+ Thread t1=new Thread(new Test_Thread (1000,"Fast"));
+ t1.start();
+ Thread t2=new Thread(new Test_Thread (3000,"Slow"));
+ t2.start();
+}
+}
+(3) 创建简单的程序 ThreeThread.java，该程序将创建三个线程，每个线程应
+当显示它所运行的时间（可以考虑使用 Date 类或 Calendar 类）
