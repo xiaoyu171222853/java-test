@@ -1,0 +1,111 @@
+
+一、实验目的和要求
+掌握类的类的方式、对象生成方式，整体结构的处理，如何封装 信息，如何验证效果
+二、实验内容和原理
+1、设计一个空间“点”类，计算任意两点之间的距离，计算任意 一点距离原点的距离。
+2、创建一个复数类 complex，以复数进行数学运算、复数具有如 下格式：
+RealPart+ImaginaryRart*I ,其中，I 为-1 的平方根。 要求如下：
+① 利用浮点变量表示此类的私有数据。提供两个构造方法，一 个用于此类声明的对象的初始化；一个为默认的无参构造方法。
+② 提供两复数加、减、乘的运算方法。
+③ 按格式(a,b)打印复数。其中 a 为实部，b 为虚部
+三、程序代码（要求有注释说明）
+1.空间点：
+import java.util.Scanner; //导入包
+import java.lang.Math; //导入包
+
+//测试类代码如下：
+public class pointtest {
+    static Scanner sc = new Scanner(System.in); // 生成对象
+    static double x, y, z, x1, y1, z1, X, Y, Z, result, result1, result2; // 定义变量
+
+    public static void main(String[]args) {
+        points create = new points(); // 生成对象
+        create.shuru(); // 调用
+        result = create.pointdistance(); // 赋值——两点之间的距离
+        result1 = create.origindistance1();// 赋值——第一个点离原点距离
+        result2 = create.origindistance2();// 赋值——第二个点离原点距离
+        System.out.println("两点之间的距离为："+result);
+        System.out.println("第一个点离原点的距离为："+result1);
+        System.out.println("第二个点离原点的距离为："+result2);
+    }
+}
+
+// 类的设计代码如下：
+class points extends pointtest { // 点类，继承测试类
+    void shuru() { // 方法——用户输入点坐标
+        System.out.print("请输入第一个三维空间点的坐标(空格隔开):");
+        x = sc.nextDouble();
+        y = sc.nextDouble();
+        z = sc.nextDouble();
+        System.out.println("第一个空间点创建成功！");
+        System.out.print("请输入第二个三维空间点的坐标(空格隔开):");
+        x1 = sc.nextDouble();
+        y1 = sc.nextDouble();
+        z1 = sc.nextDouble();
+        System.out.println("第二个空间点创建成功！");
+    }
+
+    double pointdistance() { // 计算两点之间的距离
+        X = Math.pow(x - x1, 2);
+        Y = Math.pow(y - y1, 2);
+        Z = Math.pow(z - z1, 2);
+        return Math.sqrt(X + Y + Z);
+    }
+
+    double origindistance1() { // 计算第一个点离原点距离
+        return Math.sqrt(x * x + y * y + z * z);
+    }
+
+    double origindistance2() { // 计算第二个点离原点距离
+        return Math.sqrt(x1 * x1 + y1 * y1 + z1 * z1);
+    }
+}
+
+
+2.以复数进行数学运算
+import java.util.Scanner;
+
+public class complextest {
+    // 主测试类
+
+    static Scanner sx = new Scanner(System.in); // 生成对象
+    static Double x, y;
+
+    public static void main(String[] args) {
+        System.out.print("请输入复数C1的实部与虚部(空格隔开):");        //提示
+        complex C1 = new complex(sx.nextDouble(), sx.nextDouble()); // 获取C1实部与虚部
+        System.out.print("请输入复数C2的实部与虚部(空格隔开):");        
+        complex C2 = new complex(sx.nextDouble(), sx.nextDouble()); // 获取C2实部与虚部
+        System.out.println(
+                "(C1 + C1) = " + (C1.RealPart + C2.RealPart) + " + " + (C1.ImaginaryPart + C2.ImaginaryPart) + "i"); // +
+        System.out.println(
+                "(C1 - C2) = " + (C1.RealPart - C2.RealPart) + " + " + (C1.ImaginaryPart - C2.ImaginaryPart) + "i"); // -
+        System.out.println("(C1 * C2) = " + (C1.RealPart * C2.RealPart - C1.ImaginaryPart * C2.ImaginaryPart) + " + "
+                + (C1.ImaginaryPart * C2.RealPart + C1.RealPart * C2.ImaginaryPart) + "i"); // *
+    }
+}
+
+// 复数类
+class complex extends complextest {
+    double RealPart, ImaginaryPart; // 私有变量——实部与虚部
+
+    complex(Double a, Double b) { // 主测试类类声明的对象的初始化
+        this.RealPart = a;
+        this.ImaginaryPart = b;
+    }
+
+    // 默认的无参构造方法
+    complex() {
+    }
+}
+
+
+
+
+四、实验结果截屏图
+ 略
+五、实验结果与分析
+C1=a+bi，C2=c+di是任意两个复数
+它们的和是 (a+bi)+(c+di)=(a+c)+(b+d)i
+它们的差是 (a+bi)-(c+di)=(a-c)+(b-d)i
+它们的积(a+bi)(c+di)=(ac-bd)+(bc+ad)i
