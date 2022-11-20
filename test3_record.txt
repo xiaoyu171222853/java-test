@@ -1,0 +1,70 @@
+
+一、实验目的和要求
+任何编程语言，在具体实现功能时均使用三种典型的控制结构完成。但绝对不是单一的使用，绝大多数情况是综合运用这些规则进行设计。
+
+二、实验内容和原理
+编程实现“整数加法练习”的程序要求如下：
+1、能够实现连续若干个题（考虑如何实现）；
+2、计算过程中允许重新录入若干次答案（考虑如何实现）
+3、能够根据正确与错误统计分数；
+4、能够实现动态的评价方式；
+5、要求两个加数与答案均为两位整数（实验难点）；
+扩展要求：能够实现两位小数的加法运算
+三、程序代码（要求有注释说明）
+import java.util.Random; // 导入相关的包
+import java.util.Scanner; // 导入相关的包
+
+public class additiontest {
+	static Scanner ans = new Scanner(System.in); // 生成对象
+
+	public static void main(String[] args) {
+		Random num = new Random(); // 随机数
+		System.out.print("\t" + "请输入题目数量:"); // 输出“请输入题目数量”，使 实现连续若干个题 能自己控制
+		int j = ans.nextInt(); // 使用对象完成数据输入——获取题目数量
+		int i = 0; // 计数
+		int grade = 0; // 成绩(统计分数用)
+		for (; i < j;) { // 循环
+			int a = num.nextInt(41) + 10; // 随机数范围[10-50]从而实现加数与答案均为两位整数
+			int b = num.nextInt(40) + 10; // 随机数范围[10-49]从而实现加数与答案均为两位整数
+			System.out.print("\t" + a + "+" + b + "="); // 输出题目
+			int key = ans.nextInt(); //使用对象完成数据输入——玩家输入答案
+			i++;
+			if (a + b == key) { // 分析结果
+				grade++;
+				System.out.println("true,得分1,目前得分:" + grade);
+			} else {
+				System.out.println("false,得分0,目前得分:" + grade);
+				System.out.print("\t" + "请输入允许重新输入正确答案的次数:"); // 实现重新录入若干次答案 使次数能自己控制
+				int T = ans.nextInt(); //使用对象完成数据输入——获取 重新录入答案 次数
+				while (a + b != key) { // 重新录入时的循环
+					for (int m = 0; m < T; m++) {
+						System.out.print("\t" + a + "+" + b + "="); // 允许重新计算
+						int no = ans.nextInt();使用对象完成数据输入——答案
+						if (a + b == no) { // 重新输入答案 分析结果
+							System.out.println("恭喜,改正成功,因这次为改正,故得分为0,目前得分:" + grade);
+							break;
+						} else
+							System.out.println("false,得分0,目前得分:" + grade);
+					}
+					break;
+				}
+			}
+		}
+		System.out.println("最终得分" + grade); // 根据正确与错误统计分数
+		if (i == grade) // 动态的评价方式
+			System.out.println("恭喜全对，做的很棒哦");
+		else
+			System.out.println("您一共答题:" + i + "题," + "答对题数:" + grade + "题,继续加油哦~");
+	}
+}
+
+四、实验结果截屏
+ 略
+五、实验结果与分析
+	int a = num.nextInt(41) + 10; // 随机数范围[10-50]从而实现加数与答案均为两位整数
+	int b = num.nextInt(40) + 10; // 随机数范围[10-49]从而实现加数与答案均为两位整数
+	for (; i < j;) // 循环，j为用户输入的题目数量能够实现连续若干个题
+	while (a + b != key) { // 重新录入时的循环
+	for (int m = 0; m < T; m++) { //T为用户输入的重新录入答案的次数 实现允许重新录入若干次答案
+
+
