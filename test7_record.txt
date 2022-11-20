@@ -1,0 +1,117 @@
+
+一、	实验目的和要求
+类的多态有多种体现方式，比较多的是在程序运行期间，根据类的引 用关系，自动寻找匹配的方法，参考下面的案例内容。 分析下面代码的实现过程，尝试使用内存分布图分析代码的执行过程。
+ 
+二、实验内容和原理
+(1)编写应用程序，具体要求如下： 
+① 声明一个抽象类 Pet，封装属性 name 和 sex，声明一个带有两个参数的构造函数，声明抽象方法 void talk()和 void eat()；
+② 声明一个 Dog 类继承自 Pet，封装属性 color，声明带有三个 参数的构造函数，重写 talk()和 eat()方法；
+③ 声明一个 Cat 类继承自 Pet，封装属性 weight，声明带有三个 参数的构造函数，重写 talk()和 eat()方法；
+④ 编写测试类，通过有参构造函数实例化 Dog 类对象，调用 talk() 方法和 eat()方法；通过有参构造函数实例化 Cat 类对象，调 用 talk()方法和 eat()方法；
+(2) 按照要求编写一个 Java 应用程序：
+① 定义一个抽象类 Person，包含抽象方法 eat()，封装属性 name、 sex、age，声明包含三个参数的构造方法；
+② 定义一个 Chinese 类，继承自 Person 类，重写父类的 eat() 方法，并定义一个自己特有的方法 shadowBoxing()；
+③ 定义一个 English 类，继承自 Person 类，重写父类的 eat() 方法，并定义一个自己特有的方法 horseRiding()；
+编写测试类，定义一个 showEat()方法，使用父类作为方法的形参， 实现多态，分别调用 showEat()方法，通过强制类型转换调用各自类特有的方法
+三、程序代码（要求有注释说明）
+(1)、
+public class Pettest { //主测试类
+    public static void main(String[] args) {
+        Dog d = new Dog("小狗", "雄", "yellow");//new对象Dog
+        d.talk();//调用方法
+        d.eat();
+        Cat c = new Cat("小喵", "磁", 12);//new对象Cat
+        c.talk();//调用方法
+        c.eat();
+    }
+}
+
+abstract class Pet {//声明抽象类    
+    private String name;//封装属性
+    private String sex;
+//get/set
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Pet(String _name, String _sex) {//声明一个带有两个参数的构造函数
+        name = _name;
+        sex = _sex;
+    }
+//声明抽象方法 void talk()和 void eat()；
+    public abstract void talk();
+    public abstract void eat();
+}
+
+class Dog extends Pet {//Dog类继承Pet
+    private String color;//封装color
+
+    public Dog(String _name, String _sex, String color) {//声明一个带有三个参数的构造函数
+        super(_name, _sex);
+        this.color=color;
+    }
+//重写 talk()和 eat()方法；
+    public void talk() {
+        System.out.println(getName() + ":" + getSex() + "性，汪汪汪~~~");
+    }
+
+    public void eat() {
+        System.out.println(getName() + ":" + color + "色，呼呼呼");
+    }
+
+}
+
+class Cat extends Pet {//Cat类继承Pet
+    private double weight;//封装weight
+
+    public Cat(String _name, String _sex, double weight) {//声明一个带有三个参数的构造函数
+        super(_name, _sex);
+        this.weight=weight;
+    }
+//重写 talk()和 eat()方法；
+    public void talk() {
+        System.out.println(getName() + "，一只"+ weight +" 斤重的的"+getSex()+"性小喵，喵喵喵~~~");
+    }
+
+    public void eat() {
+        System.out.println(getName() + ":cat唔唔唔");
+    }
+
+}
+(2)、
+public class Persontest {// 测试类     public static void main(String[] args) {         Person Ch = new Chinese("小宇", "男", 20);//对象          Person En = new English("Ben", "男", 19);         showEat(Ch);// showEat调用Chinese和English的eat()方法         showEat(En);          // 强转，调用各类特有方法         Chinese chinese = (Chinese) Ch;         chinese.shadowBoxing();         English english = (English) En;         english.horseRiding();     } //showEat()方法，使用父类作为方法的形参     public static void showEat(Person p) {         p.eat();     }  }  abstract class Person {// 定义一个抽象类 Person     private String name;// 封装属性     private String sex;     private int age;      public abstract void eat();//抽象方法 eat()      public Person(String _name, String _sex, int _age) {// 声明包含三个参数的构造方法         name = _name;         sex = _sex;         age = _age;     } //getter/setter     public String getName() {         return name;     }      public void setName(String name) {         this.name = name;     }      public String getSex() {         return sex;     }      public void setSex(String sex) {         this.sex = sex;     }      public int getAge() {         return age;     }      public void setAge(int age) {         this.age = age;     }  }  class Chinese extends Person {// 定义一个 Chinese 类，继承自 Person 类     public Chinese(String _name, String _sex, int _age) {         super(_name, _sex, _age);     }      void shadowBoxing() {// 定义一个自己特有的方法         System.out.println("Chinese 特有");     }      public void eat() {// 重写父类的 eat()         System.out.println(getName() + getAge() + "岁，" + getSex() + "孩，Chinese eat");     } }  class English extends Person {// 定义一个 English 类，继承自 Person 类，     public English(String _name, String _sex, int _age) {         super(_name, _sex, _age);     }      public void eat() {// ，重写父类的 eat()方法，         System.out.println(getName() + getAge() + "岁，" + getSex() + "孩，Chinese eat");     }       void horseRiding() {// 定义一个自己特有的方法         System.out.println("English 特有");     } } 
+四、实验结果截屏图
+略
+
+五、实验结果与分析
+（1）、
+小狗:雄性，汪汪汪~~~
+小狗:yellow色，呼呼呼
+小喵，一只12.0 斤重的的磁性小喵，喵喵喵~~~
+小喵:cat唔唔唔
+通过set/get方法获得被封装的name、sex、color、weight
+Dog、Cat继承抽象类Pet,并重写其两个方法，由测试类进行new相应对象并调用，由此输出显示。
+（2）、
+小宇20岁，男孩，Chinese eat
+Ben19岁，男孩，Chinese eat
+Chinese 特有
+English 特有
+通过set/get方法获得被封装的name、sex、age,
+Chinese、English类继承Person类并重写其抽象方法eat(),定义自己的方法；
+测试类一个父类为形参的方法、一个main方法， new相应对象并调用，
+将Person类型的Ch和En强制转换为Chinese和English类型，调用各自特有方法进而显示输出。
+
+
+
