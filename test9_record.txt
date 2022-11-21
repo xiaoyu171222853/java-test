@@ -1,0 +1,110 @@
+一、	实验目的和要求
+(1) 现成的概念、线程的生命周期。 
+(2) 多线程的编程：扩展 Thread 类与使用 Runnable 接口。 
+(3) 使用多线程机制实现动画
+二、实验内容和原理
+(1) 运行下面的程序，理解用创建 Thread 子类的方法实现多线程。
+import java.util.*;
+class Test_Thread extends Thread {
+ int pauseTime;
+ String name;
+ public Test_Thread (int x,String n){
+ pauseTime=x;
+ name=n;
+}
+public void run(){
+ while(true){
+ try{
+ system.out.println(name+":"+new Date(System.currentTimeMillis()));
+ Tread.sleep(pauseTime);
+ }catch(Exception e){System.out.println(e);}
+}
+}
+static public void main(String srgs[]){
+ Test_Thread tp1=new Test_Thread (1000,"Fast");
+ tp1.start();
+ Test_Thread tp2=new Test_Thread (3000,"Slow");
+ tp2.start();
+}
+}
+(2) 运行下面的程序，理解用实现 Runnable 接口的方法实现多线程。
+Import java.util.*;
+class Test_Thread implements Runnable {
+ int pauseTime;
+ String name;
+ public Test_Thread (int x,String n){
+ pauseTime=x;
+ name=n;
+}
+public void run(){
+ while(true){
+ try{
+ system.out.println(name+":"+new Date(System.currentTimeMillis()));
+ Tread.sleep(pauseTime);
+ }catch(Exception e){System.out.println(e);}
+}
+}
+static public void main(String srgs[]){
+ Thread t1=new Thread(new Test_Thread (1000,"Fast"));
+ t1.start();
+ Thread t2=new Thread(new Test_Thread (3000,"Slow"));
+ t2.start();
+}
+}
+(3) 创建简单的程序 ThreeThread.java，该程序将创建三个线程，每个线程应
+当显示它所运行的时间（可以考虑使用 Date 类或 Calendar 类）。
+
+三、程序代码（要求有注释说明）
+import java.util.*;
+
+public class ThreeThread extends Thread {//Thread子类
+    int pauseTime;//休眠时间
+    String name;//命名
+
+    public ThreeThread(int x, String n) {//含参构造
+        pauseTime = x;
+        name = n;
+    }
+
+    public void run() {//重写run
+        while (true) {
+            try {
+                System.out.println(name + ":" + new Date(System.currentTimeMillis()));//输出
+                Thread.sleep(pauseTime);//相应休眠
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {// main方法
+        //三个线程
+        ThreeThread tp1=new ThreeThread (1000,"Fast");
+        tp1.start();
+        ThreeThread tp2=new ThreeThread (3000,"mode");
+        tp2.start();
+        ThreeThread tp3=new ThreeThread (5000,"Slow");
+        tp3.start();
+    }
+}
+四、实验结果截屏图
+ 略
+五、实验结果与分析
+Fast:Mon Nov 21 10:23:29 CST 2022
+Slow:Mon Nov 21 10:23:29 CST 2022
+mode:Mon Nov 21 10:23:29 CST 2022
+Fast:Mon Nov 21 10:23:30 CST 2022
+Fast:Mon Nov 21 10:23:31 CST 2022
+mode:Mon Nov 21 10:23:32 CST 2022
+Fast:Mon Nov 21 10:23:32 CST 2022
+Fast:Mon Nov 21 10:23:33 CST 2022
+Slow:Mon Nov 21 10:23:34 CST 2022
+Fast:Mon Nov 21 10:23:34 CST 2022
+mode:Mon Nov 21 10:23:35 CST 2022
+Fast:Mon Nov 21 10:23:35 CST 2022
+Fast:Mon Nov 21 10:23:36 CST 2022
+Fast:Mon Nov 21 10:23:37 CST 2022
+mode:Mon Nov 21 10:23:38 CST 2022
+Fast:Mon Nov 21 10:23:38 CST 2022
+Slow:Mon Nov 21 10:23:39 CST 2022
+ThreeThread继承Thread类，并重写Thread类的run方法，实现显示它所运行的时间，main方法声明并new三个线程，其对象分别使用Thread类的start方法对上面的run方法进行调用，实现多线程
