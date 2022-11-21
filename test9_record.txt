@@ -55,6 +55,7 @@ static public void main(String srgs[]){
 当显示它所运行的时间（可以考虑使用 Date 类或 Calendar 类）。
 
 三、程序代码（要求有注释说明）
+```java
 import java.util.*;
 
 public class ThreeThread extends Thread {//Thread子类
@@ -87,6 +88,7 @@ public class ThreeThread extends Thread {//Thread子类
         tp3.start();
     }
 }
+```
 四、实验结果截屏图
  略
 五、实验结果与分析
