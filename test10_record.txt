@@ -1,0 +1,82 @@
+
+一、	实验目的和要求
+(1) 掌握 Java 两种基本输入/输出流类的使用。
+(2) 掌握 Java 文件类型的使用。
+(3) 掌握文件的输入、输出方法。
+二、实验内容和原理
+(1) 编写程序，实现从键盘输入字符串并在屏幕上输出。
+(2）编写一个程序，求 2~200 之间的素数，并将结果保存在文件 prime.dat 中。 再从该文件中读取内容并在屏幕上显示出来。注意异常处理。
+三、程序代码（要求有注释说明）
+（1）、
+```java
+import java.io.*;//导入io包
+public class iotest {
+  public static void main(String args[]) {
+    BufferedReader br= new BufferedReader(new InputStreamReader(System.in));//从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。
+    String s;//声明字符串
+    try {//有io需要进行捕获
+      s = br.readLine();//读取一个文本行
+      while(s!=null){//当读到的不为空时
+        if(s.equalsIgnoreCase("exit")) //当读到的为exit时，跳出循环
+        break;
+        else//否则原样输出
+        System.out.println(s);
+s = br.readLine();
+      }
+      br.close();//关闭流
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+（2）、
+```java
+import java.io.*;
+public class Tenio {
+    public static void main(String[] args) throws IOException {
+        Tenio t = new Tenio();// new对象
+        t.sushu();// 调用方法
+        FileReader fr = new FileReader("prime.dat");
+        int m;
+        while ((m = fr.read()) != -1) {// 读
+            System.out.print((char) m);
+        }
+        fr.close();// 关闭流
+
+    }
+
+    void sushu() throws IOException {
+        FileWriter fw = new FileWriter("prime.dat");// 创建文件
+        for (int i = 3; i <= 200; i++) {// 3-200循环
+            boolean num = true;
+            for (int a = 2; a < i; a++) {
+                if (i % a == 0) {// 素数判断
+                    num = false;// 不为素数改为false
+                    break;
+                }
+            }
+            if (num) {// 为素数则输出
+                fw.write(i + " ");
+            }
+        }
+        fw.close();// 关闭流以将文件保存到硬盘
+    }
+}
+```
+四、实验结果截屏图
+略
+五、实验结果与分析
+（1）、
+小宇在学习io
+小宇在学习io
+这是 小宇
+这是 小宇
+23weasad./,['das  
+23weasad./,['das
+
+从字符输入流中读取文本，缓冲各个字符，达到最高效率，声明字符串然后进行读取赋值，然后在读在输出形成循环，直到输入exit退出
+（2）、
+3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199
+调用sushu方法进行判断素数并输出保存，new FileReader对象读文件
+读到的保存在m中，转到char显示在屏幕
