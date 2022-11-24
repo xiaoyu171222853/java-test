@@ -1,0 +1,98 @@
+
+一、	实验目的和要求
+掌握基本组件类的生成，掌握布局控制的方法。编程实现基础的
+事件监听功能
+二、实验内容和原理
+(1) 使用 Container 的嵌套实现下面的布局。
+ 
+(2)设计一窗口，内含一个按钮。开始运行时，按钮显示“Click Me”字样，当
+按钮按下时，按钮显示为“Click Me Again”字样，再按一次，则按钮显示“Click Me”字样，依次循环
+三、程序代码（要求有注释说明）
+(1)、
+import java.awt.*;
+
+public class tweawt {
+    public static void main(String[] args) {
+        Frame fr = new Frame();// new一个带有标题和边框的顶层窗口(容器)。
+
+        fr.setLayout(new GridLayout(2, 3));//设置布局为GridLayout(2行3列)
+    //因为GridLayout型布局会将空间划分成规则的矩形网格，正好符合布局要求
+        fr.setTitle("Java Frame");//设置标题为Java Frame
+        fr.setBounds(200, 100, 800, 600);//设置初始位置及大小
+//新建两个panel类小容器(盒子)并在合适的地方加入
+        Panel panel = new Panel(new GridLayout(2, 1));
+        Panel panel1 = new Panel(new GridLayout(2, 2));
+      //新建若干个按钮，按合适位置排放
+        Button btn = new Button("BUTTON0");
+
+        Button btn1 = new Button("BUTTON");
+        Button btn2 = new Button("BUTTON");
+     //按照布局，要有两个按钮放一个小容器
+        panel.add(btn1);
+        panel.add(btn2);
+
+        Button btn3 = new Button("BUTTON");
+        Button btn4 = new Button("BUTTON");
+    //按照布局，要有四个按钮放第二个小容器
+        Button btn5 = new Button("BUTTON");
+        Button btn6 = new Button("BUTTON");
+        Button btn7 = new Button("BUTTON");
+        Button btn8 = new Button("BUTTON");
+        panel1.add(btn5);
+        panel1.add(btn6);
+        panel1.add(btn7);
+        panel1.add(btn8);
+    //其他正常摆放
+        Button btn9 = new Button("BUTTON");
+  //注意添加的先后顺序
+        fr.add(btn);
+        fr.add(panel);
+        fr.add(btn3);
+        fr.add(btn4);
+        fr.add(panel1);
+        fr.add(btn9);
+        fr.setVisible(true);//设置可见
+
+    }
+}
+(2)、
+import java.awt.*;
+
+import java.awt.event.*;
+
+public class tweawt {
+    static int t = 0;// 静态变量，记录点击次数
+    static Button btn = new Button("Click Me");// 创建按钮
+
+    public static void main(String[] args) {
+        Frame fr = new Frame();// 创建一个带有标题和边框的顶层窗口(容器)。
+        fr.setLayout(null);// 设置其布局为空
+        fr.setTitle("Java Frame");// 设置标题
+        // 设置初始位置及大小
+        fr.setBounds(200, 100, 800, 600);
+        btn.setBounds(100, 150, 300, 200);
+        fr.add(btn);// 将按钮添加至容器
+        Event event = new Event();
+        btn.addActionListener(event);// 按钮添加事件监听
+        fr.setVisible(true);// 设置可见
+    }
+}
+
+class Event extends tweawt implements ActionListener {// 事件监听
+    public void actionPerformed(ActionEvent e) {
+        t++;
+        if (t % 2 == 0)
+            btn.setLabel("Click Me");
+        else if (t % 2 != 0)
+            btn.setLabel("Click Me Again");
+    }
+}
+
+四、实验结果截屏图
+略
+ 
+五、实验结果与分析
+（1）、由GridLayout布局，将空间划分成规则的矩形网格，再按要求将按钮摆放并显示即可
+（2）、主要是事件监听，由t来计数，偶数时设置标签“Click Me”,奇数时设置标签“Click Me Again”。
+
+
