@@ -7,4 +7,4 @@
 ![布局.png](https://xiaoyudi.xyz/usr/uploads/2022/11/1568075236.png)
 (2)设计一窗口，内含一个按钮。开始运行时，按钮显示“Click Me”字样，当
 按钮按下时，按钮显示为“Click Me Again”字样，再按一次，则按钮显示“Click 
-Me”字样，依次循环
+Me”字样，依次循环。
