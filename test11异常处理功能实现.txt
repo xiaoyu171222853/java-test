@@ -1,0 +1,41 @@
+实验 11 异常处理功能实现
+1.实验目的 
+掌握异常的概念，以及如何定义、抛出和捕获处理异常。
+2.实验内容 
+(1) 做实验之前要求思考以下问题，作为预习内容；
+① 错误和异常有何区别？查看 Java 异常类的关系图。
+② 异常是如何抛出、捕获和处理的？
+③ Java 捕获和处理异常的结构式怎样的？
+④ Try 语句如何嵌套？Throw 语句有何作用？Finally 程序快的作用是什
+么？
+(2) 运行下面的程序，理解异常的抛出、捕获与处理。
+Import java.io.*;
+public class Test{
+ public static void main(String args[]){
+ for(int i=0;i<4;i++){
+ int k;
+ try{
+ switch(i){
+ case 0: //divided by zero
+ int zero=0;
+ k=911; //zero
+ break;
+ case 1://null pointer
+ int b[]=null;
+ k=b[0];
+ break;
+ case 2; //array index out of bound
+ int c[]=new int[2];
+ k=c[9];
+ break;
+ case 3: //string index out of bound
+ char ch="abc".charAt(99);
+ break;
+ }
+ }catch(Exception e){
+ System.out.println("\nTestcase#"+i+"\n");
+ System.out.println(e);
+ }
+ }
+ }
+}
