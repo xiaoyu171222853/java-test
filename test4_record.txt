@@ -95,7 +95,7 @@ class complex extends complextest {
     }
 
     // 默认的无参构造方法
-    complex() {
+   public complex() {
     }
 }
 
